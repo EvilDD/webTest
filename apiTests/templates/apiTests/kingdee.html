@@ -1,0 +1,100 @@
+{% extends "apiTests/index.html" %}
+{% block apiForm %}    
+    <form class="pure-form">
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-1">
+                <span>API请求url:</span>
+                <input class="pure-u-1 pure-u-md-1-1" type="text" value="{{ apiUrl }}" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <span class="pure-u-1 pure-u-md-1-5">app_key:</span>
+                <input type="text" value="{{ systemData.app_key }}" readonly>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <span class="pure-u-1 pure-u-md-1-5">session:</span>
+                <input type="text" value="{{ systemData.session }}" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <span class="pure-u-1 pure-u-md-1-5">v:</span>
+                <input type="text" value="{{ systemData.v }}" readonly>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <span class="pure-u-1 pure-u-md-1-5">format:</span>
+                <input type="text" value="{{ systemData.format }}" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <span class="pure-u-1 pure-u-md-1-5">partner_id:</span>
+                <input type="text" value="{{ systemData.partner_id }}" readonly>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <span class="pure-u-1 pure-u-md-1-5">shopid:</span>
+                <input type="text" value="{{ systemData.shopid }}" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <span class="pure-u-1 pure-u-md-1-5">timestamp:</span>
+                <input type="text" value="{{ systemData.timestamp }}" readonly>
+            </div>
+        </div>
+        <br>
+        {% if api_name == 'searchGoods'  %} 
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <span class="pure-u-1 pure-u-md-1-5">method:</span>
+                    <input type="text" value="{{ apiData.method }}" readonly>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <span class="pure-u-1 pure-u-md-1-5">session:</span>
+                    <input type="text" value="{{ systemData.session }}" readonly>
+                </div>
+            </div>
+            <br>
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <span class="pure-u-1 pure-u-md-1-5">v:</span>
+                    <input type="text" value="{{ systemData.v }}" readonly>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <span class="pure-u-1 pure-u-md-1-5">format:</span>
+                    <input type="text" value="{{ systemData.format }}" readonly>
+                </div>
+            </div>
+            <br>
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <span class="pure-u-1 pure-u-md-1-5">partner_id:</span>
+                    <input type="text" value="{{ systemData.partner_id }}" readonly>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <span class="pure-u-1 pure-u-md-1-5">shopid:</span>
+                    <input type="text" value="{{ systemData.shopid }}" readonly>
+                </div>
+            </div>
+            <br>
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <span class="pure-u-1 pure-u-md-1-5">timestamp:</span>
+                    <input type="text" value="{{ systemData.timestamp }}" readonly>
+                </div>
+            </div>
+            <br>
+        {% endif %}       
+        {% if api_name == 'modifyInventory' %}
+            def
+        {% endif %}
+        {% if api_name == 'searchOrder' %}
+            ghi
+        {% endif %}
+    </form>
+{% endblock  %}

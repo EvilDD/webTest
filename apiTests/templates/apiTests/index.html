@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %} 
+<title>接口测试系统</title>    
+{% endblock%}
+{% block menu %}
+<div id="menu">
+    <div class="pure-menu pure-menu-open">
+        <a class="pure-menu-heading menu-item-divided">现货采购</a>
+        <ul>
+            <li class=" ">
+                <a href="test">创建订单</a>
+            </li>
+            <li class=" ">
+                <a href="/layouts/">查看订单状态</a>
+            </li>
+            <li class=" ">
+                <a href="/base/">获取商品库存</a>
+            </li>
+        </ul>
+        <a class="pure-menu-heading menu-item-divided">金碟进销存</a>
+        <ul>
+            <li>
+                <a href="{% url 'apis:kingdee_api' 'searchGoods' %}">查询商品</a>
+            </li>
+            <li>
+                <a href="{% url 'apis:kingdee_api' 'modifyInventory' %}">修改商品库存</a>
+            </li>
+            <li>
+                <a href="{% url 'apis:kingdee_api' 'searchOrder' %}">查询交易数据</a>
+            </li>
+        </ul>
+        <a class="pure-menu-heading menu-item-divided">供应商应用</a>
+        <ul>
+            <li>
+                <a href="">商品新增</a>
+            </li>
+            <li>
+                <a href="">消费税列表</a>
+            </li>
+            <li>
+                <a href="">商品类型</a>
+            </li>
+            <li>
+                <a href="">品牌数据</a>
+            </li>
+            <li>
+                <a href="">商品单位</a>
+            </li>
+            <li>
+                <a href="">发货地/商品来源</a>
+            </li>
+            <li>
+                <a href="">商品规格</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock%}
+{% block content %}
+<div id="main">
+    <div class="formleft"> 
+        {% block apiForm %}
+        {% endblock  %}
+    </div>
+    {% if isDisplay %}
+        <div style="padding-top: 300px; color: #666; text-align:center">
+            <h1 style="font-size:50px;font-weight:bold;">欢迎进入API测试系统</h1>
+        </div>  
+    {% else %}
+        <div class="formright">
+            <textarea name="textPost" readonly class="mytext01">
+            </textarea>
+            <br>
+            <textarea name="testGet" readonly class="mytext02">
+            </textarea>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

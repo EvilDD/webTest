@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% block title %}
+    <title>测试系统</title>
+    {% endblock%}
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href={% static "css/main-old-ie.css" %}>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href={% static "css/main.css" %}>
+    <!--<![endif]-->
+    <!--官方提供的cdn加速地址-->
+    <!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+</head>
+
+<body>
+    <div id="layout">
+        {% block menu %}
+        <div id="menu">
+        </div>
+        {% endblock%} {% block content %}
+        <div id="main">
+        </div>
+        {% endblock %}
+    </div>
+</body>
+
+</html>
