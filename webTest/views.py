@@ -1,6 +1,5 @@
-from django.http import HttpResponseNotFound
+from django.shortcuts import render
 
 
 def index(request):
-    html = "这是主页面,请加api后缀!"
-    return HttpResponseNotFound(html)
+    return render(request, 'index.html')

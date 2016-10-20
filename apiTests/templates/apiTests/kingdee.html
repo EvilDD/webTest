@@ -1,100 +1,82 @@
 {% extends "apiTests/index.html" %}
-{% block apiForm %}    
-    <form class="pure-form">
-        <div class="pure-g">
-            <div class="pure-u-1 pure-u-md-1-1">
-                <span>API请求url:</span>
-                <input class="pure-u-1 pure-u-md-1-1" type="text" value="{{ apiUrl }}" readonly>
+{% block js %}
+    <script>
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+        $(function () {
+            $('#J_Submit').click(function () {
+                var now = new Date().Format("yyyy-MM-dd hh:mm:ss");
+                $('#id_timestamp').val(now);
+                var postData = $('#form1').serialize();
+                postData = decodeURIComponent(postData);//解码
+                postData = postData.replace('+', ' ');//替换时间中‘+’
+                num = postData.indexOf('&');//&的下标
+                postData = postData.substring(num + 1);//截取第一个&以后的字符,去除csrf
+                $('.text1').val(postData);
+                $.ajax({
+                    type: 'POST',
+                    url:{{ postUrl }},
+                    data: $('#form1').serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        $('.text2').val(JSON.stringify(data));
+                    },
+                    error: function () {
+                        alert('ajax获取数据异常!');
+                    }
+                });
+            })
+        })
+    </script>
+{% endblock %}
+{% block left %}
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <div class="row clearfix">
+                <form id='form1'>
+                    {% csrf_token %}
+                    <div class="col-md-6 column">
+                        <h1>系统参数</h1>
+                        <table class="t1">
+                            {{ sysform.as_table }}
+                        </table>
+                    </div>
+                    <div class="col-md-6 column">
+                        <h1>其他参数</h1>
+                        <table class="t1">
+                            {{ otherform.as_table }}
+                        </table>
+                    </div>
+                    <button id="J_Submit" type="button" class="btn">提交</button>
+                </form>
             </div>
         </div>
-        <br>
-        <div class="pure-g">
-            <div class="pure-u-1 pure-u-md-1-2">
-                <span class="pure-u-1 pure-u-md-1-5">app_key:</span>
-                <input type="text" value="{{ systemData.app_key }}" readonly>
+        <div class="col-md-6 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <textarea class="text1" readonly="readonly">
+                    </textarea>
+                </div>
             </div>
-            <div class="pure-u-1 pure-u-md-1-2">
-                <span class="pure-u-1 pure-u-md-1-5">session:</span>
-                <input type="text" value="{{ systemData.session }}" readonly>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <textarea class="text2" readonly="readonly">
+                    </textarea>
+                </div>
             </div>
         </div>
-        <br>
-        <div class="pure-g">
-            <div class="pure-u-1 pure-u-md-1-2">
-                <span class="pure-u-1 pure-u-md-1-5">v:</span>
-                <input type="text" value="{{ systemData.v }}" readonly>
-            </div>
-            <div class="pure-u-1 pure-u-md-1-2">
-                <span class="pure-u-1 pure-u-md-1-5">format:</span>
-                <input type="text" value="{{ systemData.format }}" readonly>
-            </div>
-        </div>
-        <br>
-        <div class="pure-g">
-            <div class="pure-u-1 pure-u-md-1-2">
-                <span class="pure-u-1 pure-u-md-1-5">partner_id:</span>
-                <input type="text" value="{{ systemData.partner_id }}" readonly>
-            </div>
-            <div class="pure-u-1 pure-u-md-1-2">
-                <span class="pure-u-1 pure-u-md-1-5">shopid:</span>
-                <input type="text" value="{{ systemData.shopid }}" readonly>
-            </div>
-        </div>
-        <br>
-        <div class="pure-g">
-            <div class="pure-u-1 pure-u-md-1-2">
-                <span class="pure-u-1 pure-u-md-1-5">timestamp:</span>
-                <input type="text" value="{{ systemData.timestamp }}" readonly>
-            </div>
-        </div>
-        <br>
-        {% if api_name == 'searchGoods'  %} 
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-2">
-                    <span class="pure-u-1 pure-u-md-1-5">method:</span>
-                    <input type="text" value="{{ apiData.method }}" readonly>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2">
-                    <span class="pure-u-1 pure-u-md-1-5">session:</span>
-                    <input type="text" value="{{ systemData.session }}" readonly>
-                </div>
-            </div>
-            <br>
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-2">
-                    <span class="pure-u-1 pure-u-md-1-5">v:</span>
-                    <input type="text" value="{{ systemData.v }}" readonly>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2">
-                    <span class="pure-u-1 pure-u-md-1-5">format:</span>
-                    <input type="text" value="{{ systemData.format }}" readonly>
-                </div>
-            </div>
-            <br>
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-2">
-                    <span class="pure-u-1 pure-u-md-1-5">partner_id:</span>
-                    <input type="text" value="{{ systemData.partner_id }}" readonly>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2">
-                    <span class="pure-u-1 pure-u-md-1-5">shopid:</span>
-                    <input type="text" value="{{ systemData.shopid }}" readonly>
-                </div>
-            </div>
-            <br>
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-2">
-                    <span class="pure-u-1 pure-u-md-1-5">timestamp:</span>
-                    <input type="text" value="{{ systemData.timestamp }}" readonly>
-                </div>
-            </div>
-            <br>
-        {% endif %}       
-        {% if api_name == 'modifyInventory' %}
-            def
-        {% endif %}
-        {% if api_name == 'searchOrder' %}
-            ghi
-        {% endif %}
-    </form>
-{% endblock  %}
+    </div>
+{% endblock %}

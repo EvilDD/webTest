@@ -1,0 +1,55 @@
+{% extends "apiTests/index.html" %}
+{% block left %}
+
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                    <h1>系统参数</h1>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="查询">
+                    </form>
+                </div>
+                <div class="col-md-6 column">
+                    <h1>其他参数</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h2>
+                        Heading
+                    </h2>
+                    <p>
+                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus
+                        commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                        Etiam
+                        porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                    </p>
+                    <p>
+                        <a class="btn" href="#">View details »</a>
+                    </p>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h2>
+                        Heading
+                    </h2>
+                    <p>
+                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus
+                        commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                        Etiam
+                        porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                    </p>
+                    <p>
+                        <a class="btn" href="#">View details »</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
