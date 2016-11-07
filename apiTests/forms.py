@@ -26,8 +26,8 @@ class searchGoodForm(forms.Form):
     )
     start_time = forms.DateTimeField(label='开始时间', required=False)
     end_time = forms.DateTimeField(label='结束时间', required=False)
-    page_no = forms.IntegerField(label='页数', required=False)
-    page_size = forms.IntegerField(label='每页条数', required=False)
+    page_no = forms.IntegerField(label='页数', required=False, min_value=0)
+    page_size = forms.IntegerField(label='每页条数', required=False, min_value=0)
     status = forms.ChoiceField(label='上下架', choices=SALE_OR_STOCK_CHOICES)
     num_iid = forms.CharField(label='商品数字Id', required=False)
 
@@ -38,7 +38,7 @@ class modinvForm(forms.Form):
         (2, '增量更新')
     )
     num_iid = forms.CharField(label='商品数字Id')
-    quantity = forms.IntegerField(label='库存修改值')
+    quantity = forms.IntegerField(label='库存修改值', min_value=0)
     sku_id = forms.CharField(label='sku的数字id', required=False)
     type = forms.ChoiceField(label='库存更新方式', choices=TYPE_CHOICE)
 
@@ -57,9 +57,44 @@ class searchOrderForm(forms.Form):
     )
     start_time = forms.DateTimeField(label='开始时间', required=False)
     end_time = forms.DateTimeField(label='结束时间', required=False)
-    page_no = forms.IntegerField(label='页码', required=False)
-    page_size = forms.IntegerField(label='每页条数', required=False)
+    page_no = forms.IntegerField(label='页码', required=False, min_value=0)
+    page_size = forms.IntegerField(label='每页条数', required=False, min_value=0)
     use_has_next = forms.BooleanField(label='是否启用分页', required=False)
     status = forms.ChoiceField(label='交易状态', choices=PAY_STATUS_CHOICE)
     datatype = forms.ChoiceField(label='时间类型', choices=TIME_TYPE_CHOICE)
     tid = forms.CharField(label='订单号', required=False)
+
+
+class ihaixieForm(forms.Form):
+    style = forms.TextInput(attrs={
+        # 'disabled': 'disabled',
+        # 'size': 30,
+        'readonly': 'readonly',
+    })
+    url = forms.CharField(label='请求的url', widget=style)
+    u = forms.CharField(label='用户名', widget=style)
+    p = forms.CharField(label='密码', widget=style)
+
+
+class creatOrderForm(forms.Form):
+    SHIPPING_TYPE_CHOICE = (
+        (1, 'test'),
+
+    )
+    reference_number = forms.CharField(label='订单号')
+    reciver_name = forms.CharField(label='收件人姓名')
+    reciver_id_number = forms.CharField(label='身份证号码')
+    reciver_mobile = forms.CharField(label='收件人手机号码', required=False)
+    reciver_tel = forms.CharField(label='收件人电话号码', required=False)
+    shipping_fee = forms.FloatField(label='物流费用', required=False, min_value=0)
+    shipping_type = forms.ChoiceField(label='清关物流方式', choices=SHIPPING_TYPE_CHOICE)
+    postcode = forms.CharField(label='收件人邮编')
+    province = forms.CharField(label='收件人省份')
+    city = forms.CharField(label='收件人城市')
+    county = forms.CharField(label='收件人区县')
+    address = forms.CharField(label='收件人地址')
+    sender_name = forms.CharField(label='寄件人姓名')
+    sender_tel = forms.CharField(label='寄件人电话')
+    goods_serial = forms.CharField(label='商品国际编码')
+    goods_num = forms.IntegerField(label='商品购买数量', min_value=0)
+    customs_goods_price = forms.FloatField(label='商品价格', required=False, min_value=0)

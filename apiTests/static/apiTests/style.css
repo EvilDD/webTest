@@ -3,6 +3,14 @@ body {
     font-size: 1.5em;
 }
 
+.wel {
+    color: #1f8dd6;
+    font-size: 5em;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 10em;
+}
+
 h1 {
     color: #1f8dd6;
 }
@@ -55,12 +63,14 @@ h1 {
     color: #1f8dd6;
     line-height: 35px;
 }
-.text1{
+
+.text1 {
     margin: 50px 0;
     height: 200px;
     width: 650px;
 }
-.text2{
+
+.text2 {
     height: 500px;
     width: 650px;
 }
